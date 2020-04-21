@@ -46,7 +46,7 @@ class individual:
             pass
         elif self.status == 1:
             self.time +=1
-            if self.time == 14:
+            if self.time == 15:
                 self.status =0
                 self.removed = 1
         else:
@@ -60,7 +60,7 @@ class individual:
 
 bounds = (10,10)
 radius = .4
-probability = .3
+probability = .25
 
 everyone = []
 for n in range(5):
@@ -73,7 +73,7 @@ for n in range(995):
 
 infected = [5]
 removed = [0]
-for n in range(40):
+for n in range(45):
     for i in range(0,len(everyone)):
         everyone[i].transmission(everyone[:i]+everyone[i+1:],radius,probability)
     infected.append(sum([x.status for x in everyone]))
@@ -82,8 +82,9 @@ vulnerable = [1000 - removed[i] - infected[i] for i in range(0,len(infected))]
 
 
 fig = plt.figure(figsize=(6,4))
-plt.xlim(0,40)
+plt.xlim(0,45)
 plt.ylim(0,1000)
+plt.tick_params(axis='x',which='both',bottom=False,top=False,labelbottom=False)
 ax = plt.axes()
 ims =[]
 for n in range(1,len(infected)+1):
@@ -93,6 +94,10 @@ for n in range(1,len(infected)+1):
     im = ax.stackplot(x,y, labels=[ 'infected','vulnerable','removed'],
              colors=['r','b','grey'])
     ims.append(im)
+for n in range(10):
+    ims.append(im)
 
-ani = animation.ArtistAnimation(fig, ims, interval=100, blit=True,repeat_delay=1000)
+ani = animation.ArtistAnimation(fig, ims, interval=120, blit=True,repeat_delay=1000)
 plt.show()
+
+ani.save('epidemiological_model.gif',writer='imagemagick')
