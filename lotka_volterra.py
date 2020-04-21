@@ -26,8 +26,7 @@ alpha = 3
 beta = .1
 gamma = .8
 delta = .03
-x_1 = 50
-x_2 = 20
+
 
 x1,y1 = [0],[50]
 x2,y2 = [0],[20]
@@ -45,11 +44,9 @@ def animate(i):
     xlist = [x1[:i+1], x2[:i+1]]
     ylist = [y1[:i+1], y2[:i+1]]
 
-    #for index in range(0,1):
     for lnum,line in enumerate(lines):
         line.set_data(xlist[lnum], ylist[lnum]) # set data for each line separately.
         line.set_label(labels[lnum])
-#    legend.remove()
     legend = plt.legend(loc='upper left')
     return lines + [legend]
 
