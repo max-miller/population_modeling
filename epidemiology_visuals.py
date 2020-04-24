@@ -17,25 +17,25 @@ class individual:
     def update_location(self):
         speed = self.speed
         bounds = self.bounds
-        x_direction = 2*np.random.random() - 1
-        y_direction = 2*np.random.random() - 1
 
-        magnitude = np.sqrt(x_direction**2 + y_direction**2)
-        x_direction = x_direction/magnitude
-        y_direction = y_direction/magnitude
+        angle = np.random.uniform(0,2*np.pi)
+        x_direction = np.cos(angle)
+        y_direction = np.sin(angle)
+
 
         distance = speed*np.random.random()
+
         if self.coord[0] + distance*x_direction < 0:
-            new_x = -(distance*x_direction+self.coord[0])
+            new_x = -distance*x_direction-self.coord[0]
         elif self.coord[0] + distance*x_direction > bounds[0]:
-            new_x = bounds[0]-(distance*x_direction - bounds[0])
+            new_x = 2*bounds[0]-distance*x_direction - self.coord[0]
         else:
             new_x = self.coord[0] + distance*x_direction
 
         if self.coord[1] + distance*y_direction < 0:
-            new_y = -(distance*y_direction+self.coord[1])
+            new_y = -distance*y_direction-self.coord[1]
         elif self.coord[1] + distance*y_direction > bounds[1]:
-            new_y = bounds[1]-(distance*y_direction - bounds[1])
+            new_y = 2*bounds[1]-distance*y_direction - self.coord[1]
         else:
             new_y = self.coord[1] + distance*y_direction
 
@@ -59,8 +59,8 @@ class individual:
                 self.status = 1
 
 bounds = (10,10)
-radius = .4
-probability = .25
+radius = .2
+probability = .2
 
 everyone = []
 for n in range(5):
@@ -76,6 +76,8 @@ removed = [0]
 for n in range(45):
     for i in range(0,len(everyone)):
         everyone[i].transmission(everyone[:i]+everyone[i+1:],radius,probability)
+    for person in everyone:
+        person.update_location()
     infected.append(sum([x.status for x in everyone]))
     removed.append(sum([x.removed for x in everyone]))
 vulnerable = [1000 - removed[i] - infected[i] for i in range(0,len(infected))]

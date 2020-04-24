@@ -40,7 +40,6 @@ for n in range(100):
     y2.append(new_y2)
 
 def animate(i):
-
     xlist = [x1[:i+1], x2[:i+1]]
     ylist = [y1[:i+1], y2[:i+1]]
 
