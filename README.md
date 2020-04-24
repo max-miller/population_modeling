@@ -14,3 +14,7 @@ Game of Life - Matplotlib Edition
 
 
 Epidemiological modeling.
+
+![Epidemiological curves](https://github.com/max-miller/population_modeling/blob/master/epidemiological_model.gif?raw=true)
+
+![Epidemiological scatter](https://github.com/max-miller/population_modeling/blob/master/epidemiological_scatter.gif?raw=true)
