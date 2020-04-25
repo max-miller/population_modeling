@@ -107,9 +107,6 @@ for n in range(300):
     im=[ax.scatter(coords[:,0],coords[:,1],c=status,cmap=cm,norm=norm)]
     ims.append(im)
 
-    master_coords.append(coords)
-    master_status.append(status)
-
 
     for i in range(0,len(everyone)):
         everyone[i].transmission(everyone[:i]+everyone[i+1:],radius,probability)
@@ -117,22 +114,6 @@ for n in range(300):
         everyone[i].update_location()
 
 
-# def init():
-#     scat.set_array([],[])
-#
-#     return scat
-
-# def animate(i):
-#     coordinates = master_coords[i]
-#     statuses = master_status[i]
-#     scat.set_array(coordinates)
-#     scat.set_array(statuses)
-#     return scat,
-#
-# # call the animator.  blit=True means only re-draw the parts that have changed.
-# anim = animation.FuncAnimation(fig, animate, repeat=False,
-#                                frames=50, interval=50, blit=False)
-
 ani = animation.ArtistAnimation(fig, ims, interval=20, blit=True,repeat_delay=1000)
-ani.save('epidemiological_scatter.gif', writer = 'imagemagick')
+ani.save('epidemiological_scatter_2.gif', writer = 'imagemagick')
 plt.show()
